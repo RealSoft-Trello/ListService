@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,7 @@ public class ListServiceImp implements ListService {
     @Override
     public ListDto createList(ListDto listDto) {
         List list = new List();
+        list.setListId(listDto.getListId());
         list.setTitle(listDto.getTitle());
         list.setBoardId(listDto.getBoardId());
         list.setCreatedAt(LocalDate.now());
@@ -38,6 +40,13 @@ public class ListServiceImp implements ListService {
         list.setTitle(listDto.getTitle());
         listRepository.save(list);
         return modelMapper.map(list, ListDto.class);
+    }
+
+    @Override
+    public java.util.List<ListDto> getListsByBoardId(Long boardId) {
+        return listRepository.getListsByBoardId(boardId).stream()
+                .map(list -> modelMapper.map(list, ListDto.class))
+                .collect(Collectors.toList());
     }
 
     private List findList(Long listId) throws ListNotFound {

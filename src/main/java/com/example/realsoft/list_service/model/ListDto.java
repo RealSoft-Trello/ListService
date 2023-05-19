@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ListDto {
+    private Long listId;
     private String title;
     private Long boardId;
     private LocalDate createdAt;

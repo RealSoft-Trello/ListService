@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("realsoft/trello/lists")
 @RequiredArgsConstructor
@@ -27,5 +29,10 @@ public class ListController {
     @PutMapping("/{id}")
     public ResponseEntity<ListDto> editList(@PathVariable(name = "id") Long listId, @RequestBody ListDto listDto) throws ListNotFound {
         return ResponseEntity.ok(listService.editList(listId, listDto));
+    }
+
+    @GetMapping("/board/{id}")
+    public ResponseEntity<List<ListDto>> getListsByBoard(@PathVariable(name = "id") Long boardId) {
+        return ResponseEntity.ok(listService.getListsByBoardId(boardId));
     }
 }
