@@ -1,6 +1,7 @@
 package com.example.realsoft.list_service.service;
 
 import com.example.realsoft.list_service.exception.ListNotFound;
+import com.example.realsoft.list_service.model.CardDto;
 import com.example.realsoft.list_service.model.ListDto;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface ListService {
     ListDto editList(Long listId, ListDto listDto) throws ListNotFound;
 
     List<ListDto> getListsByBoardId(Long boardId);
+    List<CardDto> getCardsByList(Long listId) throws ListNotFound;
 }

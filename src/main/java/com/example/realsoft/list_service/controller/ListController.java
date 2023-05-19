@@ -1,6 +1,7 @@
 package com.example.realsoft.list_service.controller;
 
 import com.example.realsoft.list_service.exception.ListNotFound;
+import com.example.realsoft.list_service.model.CardDto;
 import com.example.realsoft.list_service.model.ListDto;
 import com.example.realsoft.list_service.service.ListService;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class ListController {
     @GetMapping("/board/{id}")
     public ResponseEntity<List<ListDto>> getListsByBoard(@PathVariable(name = "id") Long boardId) {
         return ResponseEntity.ok(listService.getListsByBoardId(boardId));
+    }
+
+    @GetMapping("/{id}/cards")
+    public ResponseEntity<List<CardDto>> getCardsByList(@PathVariable(name = "id") Long listId) throws ListNotFound {
+        return ResponseEntity.ok(listService.getCardsByList(listId));
     }
 }
